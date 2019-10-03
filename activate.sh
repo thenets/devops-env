@@ -7,6 +7,10 @@ SECRETS_DIR=${DIR}/../secrets
 set -o allexport
 
 # Load common envs
+touch ${DIR}/default-config
+touch ${ENV_DIR}/config/terraform.env
+touch ${ENV_DIR}/config/vault.env
+touch ${ENV_DIR}/python_env/bin/activate
 source ${DIR}/default-config
 source ${ENV_DIR}/config/terraform.env
 source ${ENV_DIR}/config/vault.env
