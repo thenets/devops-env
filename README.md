@@ -24,3 +24,18 @@ config
 .env/
 secrets/
 ```
+
+## Config file example
+
+```ini
+# Vault
+VAULT_ADDR=https://server-url:8080
+VAULT_KV_PATH=my-company/secrets
+VAULT_SECRET_NAME=main-infra
+VAULT_USERNAME=my.user.name
+VAULT_PASSWORD=myfuckingsecretpass
+
+# Apps versions
+TERRAFORM_VERSION=0.10.8
+ANSIBLE_VERSION=2.7.11
+```
