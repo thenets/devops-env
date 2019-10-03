@@ -1,5 +1,8 @@
 #!/bin/bash
 
+
+source $( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/src/vars.sh
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 ENV_DIR=${DIR}/../.env
 SECRETS_DIR=${DIR}/../secrets
