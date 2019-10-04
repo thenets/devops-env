@@ -5,23 +5,25 @@
 
 # Setting up some colors for helping read the demo output.
 # Comment out any of the below to turn off that color.
-bold=$(tput bold)
-reset=$(tput sgr0)
+if [[ ${TERM} != "dumb" ]]; then
+    bold=$(tput bold)
+    reset=$(tput sgr0)
 
-red=$(tput setaf 1)
-green=$(tput setaf 2)
-yellow=$(tput setaf 3)
-blue=$(tput setaf 4)
-purple=$(tput setaf 5)
-cyan=$(tput setaf 6)
-white=$(tput setaf 7)
-grey=$(tput setaf 8)
-vivid_red=$(tput setaf 9)
-vivid_green=$(tput setaf 10)
-vivid_yellow=$(tput setaf 11)
-vivid_blue=$(tput setaf 12)
-vivid_purple=$(tput setaf 13)
-vivid_cyan=$(tput setaf 14)
+    red=$(tput setaf 1)
+    green=$(tput setaf 2)
+    yellow=$(tput setaf 3)
+    blue=$(tput setaf 4)
+    purple=$(tput setaf 5)
+    cyan=$(tput setaf 6)
+    white=$(tput setaf 7)
+    grey=$(tput setaf 8)
+    vivid_red=$(tput setaf 9)
+    vivid_green=$(tput setaf 10)
+    vivid_yellow=$(tput setaf 11)
+    vivid_blue=$(tput setaf 12)
+    vivid_purple=$(tput setaf 13)
+    vivid_cyan=$(tput setaf 14)
+fi
 
 log() {
     echo "${bold}$1${reset}"

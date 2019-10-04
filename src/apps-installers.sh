@@ -74,3 +74,10 @@ install_hashicorp_vagrant() {
         chmod +x ${DEVOPS_ENV_DIR}/bin/vagrant
     fi
 }
+
+# TODO not completed yet
+install_terragrunt() {
+    TERRAGRUNT_VERSION=0.19.27
+	wget -O $(DEVOPS_ENV_DIR)/bin/terragrunt https://github.com/gruntwork-io/terragrunt/releases/download/v$(TERRAGRUNT_VERSION)/terragrunt_linux_amd64
+	chmod +x $(DEVOPS_ENV_DIR)/bin/terragrunt
+}
