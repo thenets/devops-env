@@ -4,14 +4,10 @@ set -e
 
 source $( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/src/vars.sh
 
-# Fix permissions
-chmod +x  ${DEVOPS_DIR}/*.sh
-chmod +x  ${DEVOPS_DIR}/src/*.sh
-
 log_info "# Starting DevOps env installation process"
 
 # Install dependencies
-${DEVOPS_SRC_DIR}/install-dependencies.sh
+${DEVOPS_SRC_DIR}/install-os-dependencies.sh
 
 # Create Python Virtual Environment
 # and activate it
@@ -22,56 +18,20 @@ else
     log_info "[python_venv] Python virtualenv already detected"
 fi
 
-##
 # Installers apps
-##
+source ${DEVOPS_SRC_DIR}/apps-installers.sh
+install_python_awscli
+install_python_ansible
+install_hashicorp_terraform
+install_hashicorp_vault
+# install_hashicorp_vagrant
 
-log_info "[python_venv] Activating..."
-. ${DEVOPS_PYTHON_ENV_DIR}/bin/activate 
+# Create dirs
+log_info "[devops_env] Creating project dirs..."
+mkdir -p ${DEVOPS_PROJECT_DIR}/ansible
+mkdir -p ${DEVOPS_PROJECT_DIR}/terraform
+mkdir -p ${DEVOPS_PROJECT_DIR}/secrets
 
-# Install AWS CLI
-log_info "[python_venv] Installing or updating 'awscli' to the latest version..."
-pip3 install awscli --upgrade -q
-
-# Install Ansible
-log_info "[python_venv] Installing or updating 'ansible' to '${ANSIBLE_VERSION}'..."
-pip install ansible==${ANSIBLE_VERSION} -q
-
-
-# Install Terraform
-if [[ -f ${DEVOPS_ENV_DIR}/bin/terraform ]]; then
-    log_info "[hashicorp] Terraform already installed"
-else
-    log_info "[hashicorp] Installing Terraform '${TERRAFORM_VERSION}'..."
-    mkdir -p ${DEVOPS_ENV_DIR}/bin
-    wget -q -O ${DEVOPS_ENV_DIR}/bin/terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
-    cd ${DEVOPS_ENV_DIR}/bin && unzip -q -o ./terraform.zip
-    rm ${DEVOPS_ENV_DIR}/bin/terraform.zip
-    chmod +x ${DEVOPS_ENV_DIR}/bin/terraform
-fi
-
-# Install Hashicorp Vault
-if [[ -f ${DEVOPS_ENV_DIR}/bin/vault ]]; then
-    log_info "[hashicorp] Vault already installed"
-else
-    log_info "[hashicorp] Installing Vault '${VAULT_VERSION}'..."
-    mkdir -p ${DEVOPS_ENV_DIR}/bin
-    wget -q -O ${DEVOPS_ENV_DIR}/bin/vault.zip https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip
-    cd ${DEVOPS_ENV_DIR}/bin && unzip -q -o ./vault.zip
-    rm ${DEVOPS_ENV_DIR}/bin/vault.zip
-    chmod +x ${DEVOPS_ENV_DIR}/bin/vault
-fi
-
-# Install Hashicorp Vagrant
-if [[ -f ${DEVOPS_ENV_DIR}/bin/vagrant ]]; then
-    log_info "[hashicorp] Vagrant already installed"
-else
-    log_info "[hashicorp] Installing Vagrant '${VAGRANT_VERSION}'..."
-    mkdir -p ${DEVOPS_ENV_DIR}/bin
-    wget -q -O ${DEVOPS_ENV_DIR}/bin/vagrant.zip https://releases.hashicorp.com/vagrant/${VAGRANT_VERSION}/vagrant_${VAGRANT_VERSION}_linux_amd64.zip
-    cd ${DEVOPS_ENV_DIR}/bin && unzip -q -o ./vagrant.zip
-    rm ${DEVOPS_ENV_DIR}/bin/vagrant.zip
-    chmod +x ${DEVOPS_ENV_DIR}/bin/vagrant
-fi
+# TODO Create .gitignore
 
 log_info "# Installation completed"
