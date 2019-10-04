@@ -2,13 +2,14 @@
 
 source $( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/src/vars.sh
 
+set +e
 set -o allexport
 
 # Check if .env dir does exist
 if ! [[ -d ${DEVOPS_ENV_DIR} ]]; then
     log_error "[ERROR] DevOps env not initialized!"
     log_error "        You should run ./devops/install.sh"
-    exit 1
+    return
 fi
 
 # Get original PS1 before any change
