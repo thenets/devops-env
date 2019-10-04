@@ -11,7 +11,12 @@ export DEVOPS_SECRETS_DIR=${DEVOPS_PROJECT_DIR}/secrets
 export DEVOPS_PYTHON_ENV_DIR=${DEVOPS_ENV_DIR}/python_env
 
 # Import default config vars
-export $(shell sed 's/=.*//' ${DEVOPS_DIR}/default-config.ini)
+LINES=$(cat ${DEVOPS_DIR}/default-config.ini | sed 's/ //g')
+for LINE in ${LINES} ; do
+    if ! [[ ${LINE} == *"#"* ]] && [[ ${LINE} == *"="* ]]; then
+        export ${LINE}
+    fi
+done
 
 # Import libs
 source ${DEVOPS_SRC_DIR}/lib-color.sh

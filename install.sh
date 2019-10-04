@@ -8,6 +8,9 @@ source $( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/src/var
 chmod +x  ${DEVOPS_DIR}/*.sh
 chmod +x  ${DEVOPS_DIR}/src/*.sh
 
+echo_color "oi"
+exit
+
 # Install dependencies
 ${DEVOPS_SRC_DIR}/install-dependencies.sh
 
