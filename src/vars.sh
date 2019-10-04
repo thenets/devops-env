@@ -19,4 +19,4 @@ for LINE in ${LINES} ; do
 done
 
 # Import libs
-source ${DEVOPS_SRC_DIR}/lib-color.sh
+source ${DEVOPS_SRC_DIR}/lib-logs.sh
