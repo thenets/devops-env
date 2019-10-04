@@ -23,6 +23,11 @@ vivid_blue=$(tput setaf 12)
 vivid_purple=$(tput setaf 13)
 vivid_cyan=$(tput setaf 14)
 
+log() {
+    echo "${bold}$1${reset}"
+    #echo -e "\033[1m$1\033[0m"
+}
+
 log_bold() {
     echo "${bold}$1${reset}"
     #echo -e "\033[1m$1\033[0m"
