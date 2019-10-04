@@ -19,14 +19,16 @@ source ${DEVOPS_PYTHON_ENV_DIR}/bin/activate
 
 # Loads all envs from secrets
 if [[ -d ${DEVOPS_SECRETS_DIR} ]]; then
-    for FILE in "${DEVOPS_SECRETS_DIR}"/*.env; do
-        LINES=$(cat ${FILE} | sed 's/ //g')
-        for LINE in ${LINES} ; do
-            if ! [[ ${LINE} == *"#"* ]] && [[ ${LINE} == *"="* ]]; then
-                export ${LINE}
-            fi
+    if [[ "$(find ${DEVOPS_SECRETS_DIR} -name *.env -type f)" != "" ]]; then
+        for FILE in "$(find ${DEVOPS_SECRETS_DIR} -name *.env -type f)"; do
+            LINES=$(cat ${FILE} | sed 's/ //g')
+            for LINE in ${LINES} ; do
+                if ! [[ ${LINE} == *"#"* ]] && [[ ${LINE} == *"="* ]]; then
+                    export ${LINE}
+                fi
+            done
         done
-    done
+    fi
 fi
 
 # Add binaries to the PATH
