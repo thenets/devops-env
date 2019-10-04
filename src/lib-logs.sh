@@ -29,13 +29,13 @@ log_bold() {
 }
 
 log_info() {
-    echo "${cyan}$(log_bold $1)${cyan} $2${reset}"
+    echo "${cyan}$1${reset}"
 }
 
 log_warning() {
-    echo "${vivid_yellow}$(log_bold $1)${vivid_yellow} $2${reset}"
+    echo "${vivid_yellow}$1${reset}"
 }
 
 log_error() {
-    echo "${vivid_red}$(log_bold $1)${vivid_red} $2${reset}"
+    echo "${vivid_red}$1${reset}"
 }

@@ -8,12 +8,12 @@ source $( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/src/var
 chmod +x  ${DEVOPS_DIR}/*.sh
 chmod +x  ${DEVOPS_DIR}/src/*.sh
 
-log_info "oi" "de novo"
-
-exit
+log_info "# Starting DevOps env installation process"
 
 # Install dependencies
 ${DEVOPS_SRC_DIR}/install-dependencies.sh
+
+exit
 
 # Create Python Virtual Environment
 # and activate it
