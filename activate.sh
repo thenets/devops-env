@@ -1,27 +1,24 @@
 #!/bin/bash
 
+set -e
 
 source $( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/src/vars.sh
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-ENV_DIR=${DIR}/../.env
-SECRETS_DIR=${DIR}/../secrets
-
 set -o allexport
 
-# Load common envs
-touch ${DIR}/default-config
-touch ${ENV_DIR}/config/terraform.env
-touch ${ENV_DIR}/config/vault.env
-touch ${ENV_DIR}/python_env/bin/activate
-source ${DIR}/default-config
-source ${ENV_DIR}/config/terraform.env
-source ${ENV_DIR}/config/vault.env
-source ${ENV_DIR}/python_env/bin/activate
+# Check if .env dir does exist
+if ! [[ -d ${DEVOPS_ENV_DIR} ]]; then
+    log_error "[ERROR] DevOps env not initialized!"
+    log_error "        You should run ./devops/install.sh"
+    exit 1
+fi
+exit
+# Loads Python virtualenv
+source ${DEVOPS_PYTHON_ENV_DIR}/bin/activate
 
-# Load all envs from secrets
-mkdir -p ${SECRETS_DIR}
-for file_path in "${SECRETS_DIR}"/* ; do
+# Loads all envs from secrets
+mkdir -p ${DEVOPS_SECRETS_DIR}
+for file_path in "${DEVOPS_SECRETS_DIR}"/* ; do
     # Check if is a regular file
     if [ -f $file_path ]; then
         FILE_NAME=$(echo "$file_path" | awk -F/ '{print $NF}')
@@ -31,18 +28,18 @@ for file_path in "${SECRETS_DIR}"/* ; do
     fi
 done
 
-# Load root config file
+# Loads root config file
 ROOT_CONFIG_FILE=${DIR}/../config
 if test -f "$ROOT_CONFIG_FILE"; then
     source ${ROOT_CONFIG_FILE}
 fi
 
 # Add binaries to the PATH
-export PATH=${PATH}:${ENV_DIR}/bin
+export PATH=${PATH}:${DEVOPS_ENV_DIR}/bin
 
 # Add custom envs to the bash context
-if test -f "${SECRETS_DIR}/devops.env"; then
-    source ${SECRETS_DIR}/devops.env
+if test -f "${DEVOPS_SECRETS_DIR}/devops.env"; then
+    source ${DEVOPS_SECRETS_DIR}/devops.env
 fi
 
 # Do Vault login
@@ -55,7 +52,7 @@ export PS1='(DevOps) \[\e]0;\u@\h: \w\a\]\[\033[01;32m\]\u\[\033[00m\]:\[\033[01
 
 # Ansible settings
 export ANSIBLE_HOST_KEY_CHECKING=False
-export DEFAULT_VAULT_PASSWORD_FILE=${SECRETS_DIR}/ansible_vault_secret
+export DEFAULT_VAULT_PASSWORD_FILE=${DEVOPS_SECRETS_DIR}/ansible_vault_secret
 alias ansible-playbook='ansible-playbook -i ${DIR}/ansible/hosts.ini --vault-password-file ${DEFAULT_VAULT_PASSWORD_FILE}'
 
 # Vault settings

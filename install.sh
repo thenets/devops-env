@@ -15,7 +15,7 @@ if ! [[ -f ${DEVOPS_PYTHON_ENV_DIR}/bin/activate ]]; then
     log_info "[python_venv] Creating Python virtualenv..."
     virtualenv -p python3 ${DEVOPS_PYTHON_ENV_DIR}
 else
-    log_info "[python_venv] Python virtualenv already detected"
+    log_info "[python_venv] Python virtualenv detected. Skipping installation."
 fi
 
 # Installers apps
@@ -27,11 +27,10 @@ install_hashicorp_vault
 # install_hashicorp_vagrant
 
 # Create dirs
-log_info "[devops_env] Creating project dirs..."
+log_info "[devops_env] Creating project dirs if not exist..."
 mkdir -p ${DEVOPS_PROJECT_DIR}/ansible
 mkdir -p ${DEVOPS_PROJECT_DIR}/terraform
 mkdir -p ${DEVOPS_PROJECT_DIR}/secrets
 
 # TODO Create .gitignore
-
-log_info "# Installation completed"
+log_info "# Installation complete"
