@@ -39,8 +39,8 @@ export PS1="(DevOps) ${ORIGINAL_PS1}"
 
 # Ansible settings
 export ANSIBLE_HOST_KEY_CHECKING=False
-export DEFAULT_VAULT_PASSWORD_FILE=${DEVOPS_SECRETS_DIR}/ansible_vault_secret
-alias ansible-playbook='ansible-playbook -i ${DEVOPS_DIR}/ansible/hosts.ini --vault-password-file ${DEFAULT_VAULT_PASSWORD_FILE}'
+export ANSIBLE_VAULT_SECRET_FILE=${DEVOPS_SECRETS_DIR}/ansible_vault_secret
+alias ansible-playbook='ansible-playbook -i ${DEVOPS_ANSIBLE_DIR}/hosts.ini --vault-password-file ${ANSIBLE_VAULT_SECRET_FILE}'
 
 # Do Hashicorp Vault login
 source ${DEVOPS_SRC_DIR}/hashicorp_vault/get-token.sh
