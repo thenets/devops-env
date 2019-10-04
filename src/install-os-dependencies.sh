@@ -13,7 +13,6 @@ do
     if ! command_loc="$(type -p "$__command")" || [[ -z $command_loc ]]; then
         log_warning "Missing ${__command}. It will be installed."
         INSTALLATION_REQUIRED="true"
-        echo $__command
     fi
 done
 
