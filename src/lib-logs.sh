@@ -29,7 +29,12 @@ log_bold() {
 }
 
 log_info() {
-    echo "${cyan}$1${reset}"
+    if [[ $1 == *"["*"]"* ]]; then
+        out=$(echo $1 | sed "s/]/]${reset}/g")
+        echo "${vivid_purple}$out${reset}"
+    else
+        echo "${cyan}$1${reset}"
+    fi
 }
 
 log_warning() {
