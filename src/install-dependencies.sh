@@ -25,9 +25,9 @@ then
     if [ "$(id -u)" -eq 0 ]; then
         SUDO=''
     fi
-    log_info "Installing '${PACKAGES_UBUNTU}'. May be asked for password."
+    log_info "[os_dependencies] Installing '${PACKAGES_UBUNTU}'. May be asked for password."
 	${SUDO} apt-get update -qq
 	${SUDO} apt-get install -q -y ${PACKAGES_UBUNTU}
 fi
 
-log_info "# All dependencies installed"
+log_info "[os_dependencies] All dependencies installed"

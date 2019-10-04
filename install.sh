@@ -13,16 +13,31 @@ log_info "# Starting DevOps env installation process"
 # Install dependencies
 ${DEVOPS_SRC_DIR}/install-dependencies.sh
 
-exit
-
 # Create Python Virtual Environment
 # and activate it
-virtualenv -p python3 ${PYTHON_ENV_DIR}
-. ${PYTHON_ENV_DIR}/bin/activate 
+if ! [[ -f ${DEVOPS_PYTHON_ENV_DIR}/bin/activate ]]; then
+    log_info "[python_venv] Creating Python virtualenv..."
+    virtualenv -p python3 ${DEVOPS_PYTHON_ENV_DIR}
+else
+    log_info "[python_venv] Python virtualenv already detected"
+fi
 
 ##
 # Installers apps
 ##
+
+log_info "[python_venv] Activating..."
+. ${DEVOPS_PYTHON_ENV_DIR}/bin/activate 
+
+# Install AWS CLI
+log_info "[python_venv] Installing or updating 'awscli' to the latest version..."
+pip3 install awscli --upgrade -q
+
+# Install Ansible
+log_info "[python_venv] Installing or updating 'ansible' to '${ANSIBLE_VERSION}'..."
+pip install ansible==${ANSIBLE_VERSION} -q
+
+exit
 
 # Install Terraform 
 mkdir -p ${ENV_DIR}/bin
@@ -48,8 +63,3 @@ rm ${ENV_DIR}/bin/vagrant.zip
 chmod +x ${ENV_DIR}/bin/vagrant
 @echo "\n# Hashicorp Vagrant installed!\n"
 
-# Install AWS CLI
-pip3 install awscli --upgrade
-
-# Install Ansible
-pip install ansible==${ANSIBLE_VERSION}
