@@ -32,5 +32,6 @@ mkdir -p ${DEVOPS_PROJECT_DIR}/ansible
 mkdir -p ${DEVOPS_PROJECT_DIR}/terraform
 mkdir -p ${DEVOPS_PROJECT_DIR}/secrets
 
-# TODO Create .gitignore
+${DEVOPS_SRC_DIR}/update-gitignore.sh
+
 log_info "# Installation complete"
