@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [[ ${DEVOPS_DIR} != "" ]]; then
+    echo "[devops_env] Already activated."
+    return
+fi
+
 source $( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/src/vars.sh
 
 set +e
