@@ -2,8 +2,6 @@
 
 source $( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/vars.sh
 
-set -x
-
 log_info "[devops_env] Updating .gitignore file"
 
 # Check if .gitignore has \n in the tail
@@ -18,5 +16,3 @@ for FILE in ${FILES_TO_IGNORE}; do
         echo "${FILE}" >> ${DEVOPS_PROJECT_DIR}/.gitignore
     fi
 done
-
-set +x
