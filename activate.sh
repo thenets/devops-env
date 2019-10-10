@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ ${DEVOPS_DIR} != "" ]]; then
+if [[ ${PS1} == "(DevOps) "* ]]; then
     echo "[devops_env] Already activated."
     return
 fi
