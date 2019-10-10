@@ -2,10 +2,12 @@
 
 source $( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/vars.sh
 
+set -x
+
 log_info "[devops_env] Updating .gitignore file"
 
 # Check if .gitignore has \n in the tail
-if ! [[ -z "$(tail -c 1 .gitignore)" ]]; then
+if ! [[ -z "$(tail -c 1 ${DEVOPS_PROJECT_DIR}/.gitignore)" ]]; then
     echo "" >> ${DEVOPS_PROJECT_DIR}/.gitignore
 fi
 
@@ -16,3 +18,5 @@ for FILE in ${FILES_TO_IGNORE}; do
         echo "${FILE}" >> ${DEVOPS_PROJECT_DIR}/.gitignore
     fi
 done
+
+set +x

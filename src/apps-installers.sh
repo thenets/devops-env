@@ -4,13 +4,13 @@ source $( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/vars.sh
 
 
 install_python_awscli() {
-    log_info "[python_venv] Installing or updating 'awscli' to the latest version..."
+    log_info "[python_venv] Installing or upgrading 'awscli' to the latest version..."
     . ${DEVOPS_PYTHON_ENV_DIR}/bin/activate 
     pip3 install awscli --upgrade -q
 }
 
 install_python_ansible() {
-    log_info "[python_venv] Installing or updating 'ansible' to '${ANSIBLE_VERSION}'..."
+    log_info "[python_venv] Installing or upgrading 'ansible' to '${ANSIBLE_VERSION}'..."
     . ${DEVOPS_PYTHON_ENV_DIR}/bin/activate 
     pip install ansible==${ANSIBLE_VERSION} -q
 }
