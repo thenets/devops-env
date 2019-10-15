@@ -2,6 +2,11 @@
 
 source $( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/vars.sh
 
+install_pip() {
+    log_info "[python_venv] Upgrading 'pip' to the latest version..."
+    . ${DEVOPS_PYTHON_ENV_DIR}/bin/activate 
+    pip3 install pip --upgrade -q
+}
 
 install_python_awscli() {
     log_info "[python_venv] Installing or upgrading 'awscli' to the latest version..."
@@ -77,7 +82,8 @@ install_hashicorp_vagrant() {
 
 # TODO not completed yet
 install_terragrunt() {
-    TERRAGRUNT_VERSION=0.19.27
-	wget -O $(DEVOPS_ENV_DIR)/bin/terragrunt https://github.com/gruntwork-io/terragrunt/releases/download/v$(TERRAGRUNT_VERSION)/terragrunt_linux_amd64
-	chmod +x $(DEVOPS_ENV_DIR)/bin/terragrunt
+    log_info "[terragrunt] Installing Terragrunt '${TERRAGRUNT_VERSION}'..."
+    rm -f ${DEVOPS_ENV_DIR}/bin/terragrunt
+	wget -q -O ${DEVOPS_ENV_DIR}/bin/terragrunt https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_amd64
+	chmod +x ${DEVOPS_ENV_DIR}/bin/terragrunt
 }
