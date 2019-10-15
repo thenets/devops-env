@@ -23,14 +23,25 @@ ORIGINAL_PS1=${PS1}
 # Loads Python virtualenv
 source ${DEVOPS_PYTHON_ENV_DIR}/bin/activate
 
+# Check if all .env in secrets has \n in the tail
+if [[ -d ${DEVOPS_SECRETS_DIR} ]]; then
+    if [[ "$(find ${DEVOPS_SECRETS_DIR} -name *.env -type f)" != "" ]]; then
+        for FILE in $(find ${DEVOPS_SECRETS_DIR} -name *.env -type f); do
+            if ! [[ -z "$(tail -c 1 ${FILE})" ]]; then
+                echo "" >> ${FILE}
+            fi
+        done
+    fi
+fi
+
 # Loads all envs from secrets
 if [[ -d ${DEVOPS_SECRETS_DIR} ]]; then
     if [[ "$(find ${DEVOPS_SECRETS_DIR} -name *.env -type f)" != "" ]]; then
-        for FILE in "$(find ${DEVOPS_SECRETS_DIR} -name *.env -type f)"; do
+        for FILE in $(find ${DEVOPS_SECRETS_DIR} -name *.env -type f); do
             LINES=$(cat ${FILE} | sed 's/ //g')
             for LINE in ${LINES} ; do
                 if ! [[ ${LINE} == *"#"* ]] && [[ ${LINE} == *"="* ]]; then
-                    export ${LINE}
+                    export "${LINE}"
                 fi
             done
         done
