@@ -21,7 +21,13 @@ else
 fi
 
 # Import libs
-source ${DEVOPS_SRC_DIR}/libs/*.sh
+if [[ -d ${DEVOPS_SRC_DIR}/libs/ ]]; then
+    if [[ "$(find ${DEVOPS_SRC_DIR}/libs/ -name *.sh -type f)" != "" ]]; then
+        for FILE in $(find ${DEVOPS_SRC_DIR}/libs/ -name *.sh -type f); do
+            source ${FILE}
+        done
+    fi
+fi
 
 # Import default versions vars
 LINES=$(cat ${DEVOPS_DIR}/default-versions.ini | sed 's/ //g')
