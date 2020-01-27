@@ -10,7 +10,7 @@ if ! [[ -z "$(tail -c 1 ${DEVOPS_PROJECT_DIR}/.gitignore)" ]]; then
 fi
 
 # Add new items to .gitignore file
-FILES_TO_IGNORE=$(echo "config.ini .env/ secrets/" | sed 's/ /\n/g')
+FILES_TO_IGNORE=$(echo "config.ini .env/ secrets/ .terraform/ *.retry" | sed 's/ /\n/g')
 for FILE in ${FILES_TO_IGNORE}; do
     if ! grep -Fxq "${FILE}" ${DEVOPS_PROJECT_DIR}/.gitignore; then
         echo "${FILE}" >> ${DEVOPS_PROJECT_DIR}/.gitignore
