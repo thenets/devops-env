@@ -26,13 +26,16 @@ if [[ ${TERM} != "dumb" ]]; then
 fi
 
 log() {
-    echo "${bold}$1${reset}"
-    #echo -e "\033[1m$1\033[0m"
+    if [[ $1 == *"["*"]"* ]]; then
+        out=$(echo $1 | sed "s/]/]${reset}/g")
+        echo "${bold}$out${reset}"
+    else
+        echo "${bold}$1${reset}"
+    fi
 }
 
 log_bold() {
     echo "${bold}$1${reset}"
-    #echo -e "\033[1m$1\033[0m"
 }
 
 log_info() {
