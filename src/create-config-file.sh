@@ -19,6 +19,3 @@ echo "VAULT_KV_PATH=my-company/secrets" >> ${DEVOPS_CONFIG_FILE}
 echo "VAULT_SECRET_NAME=main-infra" >> ${DEVOPS_CONFIG_FILE}
 echo "VAULT_USERNAME=my.user.name" >> ${DEVOPS_CONFIG_FILE}
 echo "VAULT_PASSWORD=myfuckingsecretpass" >> ${DEVOPS_CONFIG_FILE}
-echo "" >> ${DEVOPS_CONFIG_FILE}
-
-cat ${DEVOPS_DIR}/default-config.ini >> ${DEVOPS_CONFIG_FILE}

@@ -26,13 +26,13 @@ install_python_ansible
 install_hashicorp_terraform
 install_hashicorp_vault
 # install_hashicorp_vagrant
-install_terragrunt
+# install_terragrunt
 
 # Create dirs
-log_info "[devops_env] Creating project dirs if not exist..."
-mkdir -p ${DEVOPS_PROJECT_DIR}/ansible
-mkdir -p ${DEVOPS_PROJECT_DIR}/terraform
-mkdir -p ${DEVOPS_PROJECT_DIR}/secrets
+# log_info "[devops_env] Creating project dirs if not exist..."
+# mkdir -p ${DEVOPS_PROJECT_DIR}/ansible
+# mkdir -p ${DEVOPS_PROJECT_DIR}/terraform
+# mkdir -p ${DEVOPS_PROJECT_DIR}/secrets
 
 ${DEVOPS_SRC_DIR}/update-gitignore.sh
 
