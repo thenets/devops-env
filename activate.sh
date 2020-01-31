@@ -55,7 +55,7 @@ export PATH=${PATH}:${DEVOPS_ENV_DIR}/bin
 export PATH=${PATH}:${DEVOPS_DIR}/bin
 
 # Style for bash
-export PS1="(${purple}${PROJECT_NAME}${reset} | ${vivid_purple}${DEVOPS_ENV_NAME}${reset})"' \[\e]0;\u@\h: \w\a\]\[\033[01;32m\]\u\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]$ '
+export PS1='\['"(${purple}${PROJECT_NAME}${reset} | ${vivid_purple}${DEVOPS_ENV_NAME}${reset}) "'\e]0;\u@\h: \w\a\]\[\033[01;32m\]\u\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]$ '
 #export PS1="(DevOps) ${ORIGINAL_PS1}"
 
 # Ansible settings
