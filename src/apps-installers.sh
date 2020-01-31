@@ -2,24 +2,50 @@
 
 source $( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/vars.sh
 
-install_pip() {
-    log_info "[python_venv] Upgrading 'pip' to the latest version..."
+
+###
+# Functions
+###
+install_python_lib(){
+    LIB_NAME=$1
+    
+    # TODO change message when is a upgrading
+    log_info "[python_venv] Upgrading '${LIB_NAME}' to the latest version..."
     . ${DEVOPS_PYTHON_ENV_DIR}/bin/activate 
-    pip3 install pip --upgrade -q
+    pip3 install ${LIB_NAME} -q
+}
+
+###
+# Python Libs
+##
+install_python_pip() {
+    install_python_lib "pip --upgrade"
 }
 
 install_python_awscli() {
-    log_info "[python_venv] Installing or upgrading 'awscli' to the latest version..."
-    . ${DEVOPS_PYTHON_ENV_DIR}/bin/activate 
-    pip3 install awscli --upgrade -q
+    install_python_lib "awscli --upgrade"
 }
 
 install_python_ansible() {
-    log_info "[python_venv] Installing or upgrading 'ansible' to '${ANSIBLE_VERSION}'..."
-    . ${DEVOPS_PYTHON_ENV_DIR}/bin/activate 
-    pip install ansible==${ANSIBLE_VERSION} -q
+    install_python_lib "ansible==${ANSIBLE_VERSION}"
 }
 
+install_python_cfn_lint() {
+    install_python_lib "cfn-lint --upgrade"
+}
+
+install_python_troposphere() {
+    install_python_lib "troposphere --upgrade"
+    install_python_lib "troposphere[policy] --upgrade"
+}
+
+install_python_aws_adfs() {
+    install_python_lib "ansible --upgrade"
+}
+
+###
+# Binaries
+###
 install_hashicorp_terraform() {
     if [[ -f ${DEVOPS_ENV_DIR}/bin/terraform ]]; then
         current_version=$(${DEVOPS_ENV_DIR}/bin/terraform -v | head -n 1 | sed 's/Terraform v//g')
