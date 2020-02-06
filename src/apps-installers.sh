@@ -40,7 +40,7 @@ install_python_troposphere() {
 }
 
 install_python_aws_adfs() {
-    install_python_lib "ansible --upgrade"
+    install_python_lib "aws-adfs --upgrade"
 }
 
 ###
