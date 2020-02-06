@@ -25,9 +25,10 @@ install_python_awscli
 install_python_ansible
 install_python_cfn_lint
 install_python_troposphere
-install_python_aws_adfs
+# install_python_aws_adfs
 install_hashicorp_terraform
 install_hashicorp_vault
+install_saml2aws
 # install_hashicorp_vagrant
 # install_terragrunt
 

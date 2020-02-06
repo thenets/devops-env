@@ -23,7 +23,7 @@ install_python_pip() {
 }
 
 install_python_awscli() {
-    install_python_lib "awscli --upgrade"
+    install_python_lib "awscli boto3 --upgrade"
 }
 
 install_python_ansible() {
@@ -104,6 +104,17 @@ install_hashicorp_vagrant() {
         rm ${DEVOPS_ENV_DIR}/bin/vagrant.zip
         chmod +x ${DEVOPS_ENV_DIR}/bin/vagrant
     fi
+}
+
+# TODO not completed yet
+install_saml2aws() {
+    # project from https://github.com/Versent/saml2aws
+    log_info "[saml2aws] Installing saml2aws '${SAML2AWS_VERSION}'..."
+	wget -q -O ${DEVOPS_ENV_DIR}/bin/saml2aws.tar.gz https://github.com/Versent/saml2aws/releases/download/v${SAML2AWS_VERSION}/saml2aws_${SAML2AWS_VERSION}_linux_amd64.tar.gz
+    rm -f ${DEVOPS_ENV_DIR}/bin/saml2aws
+    tar -xzvf ${DEVOPS_ENV_DIR}/bin/saml2aws.tar.gz -C ${DEVOPS_ENV_DIR}/bin/
+    rm -f ${DEVOPS_ENV_DIR}/bin/saml2aws.tar.gz
+	chmod +x ${DEVOPS_ENV_DIR}/bin/saml2aws
 }
 
 # TODO not completed yet
