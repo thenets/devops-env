@@ -22,8 +22,8 @@ fi
 
 # Import libs
 if [[ -d ${DEVOPS_SRC_DIR}/libs/ ]]; then
-    if [[ "$(find ${DEVOPS_SRC_DIR}/libs/ -name *.sh -type f)" != "" ]]; then
-        for FILE in $(find ${DEVOPS_SRC_DIR}/libs/ -name *.sh -type f); do
+    if [[ "$(find ${DEVOPS_SRC_DIR}/libs/ -name '*.sh' -type f)" != "" ]]; then
+        for FILE in $(find ${DEVOPS_SRC_DIR}/libs/ -name '*.sh' -type f); do
             source ${FILE}
         done
     fi
