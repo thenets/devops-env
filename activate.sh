@@ -26,9 +26,9 @@ source ${DEVOPS_PYTHON_ENV_DIR}/bin/activate
 
 # Loads all envs from secrets
 if [[ -d ${DEVOPS_SECRETS_DIR} ]]; then
-    if [[ "$(find ${DEVOPS_SECRETS_DIR} -name *.env* -type f)" != "" ]]; then
+    if [[ "$(find ${DEVOPS_SECRETS_DIR} -name *.env -type f)" != "" ]]; then
         # Environment specific file
-        for FILE in $(find ${DEVOPS_SECRETS_DIR} -name *.env.${DEVOPS_ENV_NAME} -type f); do
+        for FILE in $(find ${DEVOPS_SECRETS_DIR} -name *.${DEVOPS_ENV_NAME}.env -type f); do
             load_env_file ${FILE}
             FILENAME=$(realpath ${FILE} | rev | cut -d/ -f1 | rev)
             log "[env_loaded] secrets/${FILENAME}"
