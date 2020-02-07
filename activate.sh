@@ -33,13 +33,6 @@ if [[ -d ${DEVOPS_SECRETS_DIR} ]]; then
             FILENAME=$(realpath ${FILE} | rev | cut -d/ -f1 | rev)
             log "[env_loaded] secrets/${FILENAME}"
         done
-
-        # Generic env file
-        for FILE in $(find ${DEVOPS_SECRETS_DIR} -name *.env -type f); do
-            load_env_file ${FILE}
-            FILENAME=$(realpath ${FILE} | rev | cut -d/ -f1 | rev)
-            log "[env_loaded] secrets/${FILENAME}"
-        done
     fi
 fi
 
