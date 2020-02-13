@@ -11,7 +11,12 @@ saml2aws_load_config() {
     export SAML2AWS_IDP_ACCOUNT=${PROFILE_NAME}
     export SAML2AWS_PROFILE=${PROFILE_NAME}
     export SAML2AWS_CONFIGFILE=${DEVOPS_ENV_DIR}/saml2aws.${DEVOPS_ENV_NAME}
-    ${DEVOPS_ENV_DIR}/bin/saml2aws configure --idp-account=${PROFILE_NAME} --skip-prompt 1> /dev/null
+    echo INICIO
+    ${DEVOPS_ENV_DIR}/bin/saml2aws configure \
+        --idp-account=${PROFILE_NAME} \
+        --skip-prompt \
+        --disable-keychain \
+        1> /dev/null
     # TODO rename if file exist instead of delete it
     rm -f ~/.saml2aws
     ln -s ${DEVOPS_ENV_DIR}/saml2aws.${DEVOPS_ENV_NAME} ~/.saml2aws
@@ -25,7 +30,9 @@ saml2aws_load_config() {
     # Login
     export AWS_ACCESS_KEY_ID=${SAML2AWS_USERNAME}
     export AWS_SECRET_ACCESS_KEY=${SAML2AWS_PASSWORD}
-    ${DEVOPS_ENV_DIR}/bin/saml2aws login --idp-account=${PROFILE_NAME}
+    ${DEVOPS_ENV_DIR}/bin/saml2aws login \
+        --disable-keychain \
+        --idp-account=${PROFILE_NAME}
 
     # TODO Unset all SAML2AWS envs
     unset SAML2AWS_VERSION
