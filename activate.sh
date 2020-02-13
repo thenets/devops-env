@@ -36,18 +36,6 @@ if [[ -d ${DEVOPS_SECRETS_DIR} ]]; then
     fi
 fi
 
-# Saml2aws Authentication
-if [[ -d ${DEVOPS_SECRETS_DIR} ]]; then
-    if [[ "$(find ${DEVOPS_SECRETS_DIR} -name *.saml2aws -type f)" != "" ]]; then
-        # Environment specific file
-        for FILE in $(find ${DEVOPS_SECRETS_DIR} -name *.${DEVOPS_ENV_NAME}.saml2aws -type f); do
-            FILENAME=$(realpath ${FILE} | rev | cut -d/ -f1 | rev)
-            log "[saml2aws] secrets/${FILENAME}"
-            saml2aws_load_config ${FILE}
-        done
-    fi
-fi
-
 # Unset trash vars
 unset FILENAME
 unset FILE
@@ -70,5 +58,17 @@ alias ansible-playbook='ansible-playbook -i ${DEVOPS_ANSIBLE_DIR}/hosts.ini --va
 
 # Do Hashicorp Vault login
 source ${DEVOPS_SRC_DIR}/hashicorp_vault/get-token.sh
+
+# Saml2aws Authentication
+if [[ -d ${DEVOPS_SECRETS_DIR} ]]; then
+    if [[ "$(find ${DEVOPS_SECRETS_DIR} -name *.saml2aws -type f)" != "" ]]; then
+        # Environment specific file
+        for FILE in $(find ${DEVOPS_SECRETS_DIR} -name *.${DEVOPS_ENV_NAME}.saml2aws -type f); do
+            FILENAME=$(realpath ${FILE} | rev | cut -d/ -f1 | rev)
+            log "[saml2aws] secrets/${FILENAME}"
+            saml2aws_load_config ${FILE}
+        done
+    fi
+fi
 
 set +o allexport
