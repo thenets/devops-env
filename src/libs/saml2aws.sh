@@ -11,7 +11,6 @@ saml2aws_load_config() {
     export SAML2AWS_IDP_ACCOUNT=${PROFILE_NAME}
     export SAML2AWS_PROFILE=${PROFILE_NAME}
     export SAML2AWS_CONFIGFILE=${DEVOPS_ENV_DIR}/saml2aws.${DEVOPS_ENV_NAME}
-    echo INICIO
     ${DEVOPS_ENV_DIR}/bin/saml2aws configure \
         --idp-account=${PROFILE_NAME} \
         --skip-prompt \
