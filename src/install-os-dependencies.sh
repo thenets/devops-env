@@ -4,7 +4,7 @@ source $( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/vars.sh
 
 # Dependencies
 COMMANDS_REQUIRED="curl wget zip unzip jq python3 virtualenv crudini awk make bash python3-config krb5-config"
-PACKAGES_UBUNTU="curl wget zip unzip jq python3 virtualenv crudini gawk make bash python3-dev libkrb5-dev"
+PACKAGES_UBUNTU="curl wget zip unzip jq python3 virtualenv crudini gawk make bash python3-dev libkrb5-dev libxml2-dev libxslt1-dev zlib1g-dev"
 
 # Check if all commands do exist
 INSTALLATION_REQUIRED="false"
