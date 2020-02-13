@@ -48,7 +48,7 @@ export PATH=${DEVOPS_ENV_DIR}/bin:${PATH}
 export PATH=${DEVOPS_DIR}/bin:${PATH}
 
 # Style for bash
-BASH_ENV_PREFIX=$(echo "[${purple}${PROJECT_NAME}${reset} | ${vivid_purple}${DEVOPS_ENV_NAME}${reset}]" )
+BASH_ENV_PREFIX=$(echo "[\[${purple}\]${PROJECT_NAME}\[${reset}\] | \[${vivid_purple}\]${DEVOPS_ENV_NAME}\[${reset}\]]" )
 export PS1="${BASH_ENV_PREFIX}"' \[\e]0;\u@\h: \w\a\]\[\033[01;32m\]\u\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]$ '
 #export PS1="(DevOps) ${ORIGINAL_PS1}"
 unset BASH_ENV_PREFIX
