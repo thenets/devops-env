@@ -62,5 +62,7 @@ source ${DEVOPS_SRC_DIR}/hashicorp_vault/get-token.sh
 # Saml2aws Authentication
 saml2aws_load
 
+# AWSADFS Authentication
+awsadfs_load
 
 set +o allexport
