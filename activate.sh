@@ -1,8 +1,7 @@
 #!/bin/bash
 
-if [[ ${PS1} == "("*"|"*")"* ]]; then
-    log_warning "[devops_env] Already activated!"
-    log_warning "             Reactivating..."
+if [[ ${PS1} == "["*"|"*"]"* ]]; then
+    log_warning "[devops_env] Already activated! Reloading..."
     deactivate
 fi
 
@@ -50,7 +49,6 @@ export PATH=${DEVOPS_DIR}/bin:${PATH}
 # Style for bash
 BASH_ENV_PREFIX=$(echo "[\[${purple}\]${PROJECT_NAME}\[${reset}\] | \[${vivid_purple}\]${DEVOPS_ENV_NAME}\[${reset}\]]" )
 export PS1="${BASH_ENV_PREFIX}"' \[\e]0;\u@\h: \w\a\]\[\033[01;32m\]\u\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]$ '
-#export PS1="(DevOps) ${ORIGINAL_PS1}"
 unset BASH_ENV_PREFIX
 
 # Ansible settings
@@ -62,15 +60,7 @@ alias ansible-playbook='ansible-playbook -i ${DEVOPS_ANSIBLE_DIR}/hosts.ini --va
 source ${DEVOPS_SRC_DIR}/hashicorp_vault/get-token.sh
 
 # Saml2aws Authentication
-if [[ -d ${DEVOPS_SECRETS_DIR} ]]; then
-    if [[ "$(find ${DEVOPS_SECRETS_DIR} -name *.saml2aws -type f)" != "" ]]; then
-        # Environment specific file
-        for FILE in $(find ${DEVOPS_SECRETS_DIR} -name *.${DEVOPS_ENV_NAME}.saml2aws -type f); do
-            FILENAME=$(realpath ${FILE} | rev | cut -d/ -f1 | rev)
-            log "[saml2aws] secrets/${FILENAME}"
-            saml2aws_load_config ${FILE}
-        done
-    fi
-fi
+saml2aws_load
+
 
 set +o allexport

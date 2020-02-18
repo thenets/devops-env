@@ -16,14 +16,13 @@ saml2aws_load_config() {
         --skip-prompt \
         --disable-keychain \
         1> /dev/null
+
     # TODO rename if file exist instead of delete it
     rm -f ~/.saml2aws
     ln -s ${DEVOPS_ENV_DIR}/saml2aws.${DEVOPS_ENV_NAME} ~/.saml2aws
 
     # Criar os arquivos ~/.aws/{config,credentials}
     unset AWS_PROFILE
-    # aws configure set aws_access_key_id ${SAML2AWS_USERNAME} --profile ${PROFILE_NAME}
-    # aws configure set aws_secret_access_key ${SAML2AWS_PASSWORD} --profile ${PROFILE_NAME}
     aws configure set region sa-east-1 --profile ${PROFILE_NAME} 
 
     # Login
@@ -53,13 +52,18 @@ saml2aws_load_config() {
     # Switch AWS profile
     export AWS_PROFILE=${PROFILE_NAME}
 
-    echo $CONFIG_FILE_PATH
+    echo ${CONFIG_FILE_PATH}
 }
 
-# Disabled
-saml2aws_aws_configure() {
-    # Criar os arquivos ~/.aws/{config,credentials}
-    aws configure set aws_access_key_id ${AWS_ACCESS_KEY_ID} --profile ${PROFILE_NAME} 
-    aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY} --profile ${PROFILE_NAME} 
-    aws configure set region sa-east-1 --profile ${PROFILE_NAME} 
+saml2aws_load() {
+    if [[ -d ${DEVOPS_SECRETS_DIR} ]]; then
+        if [[ "$(find ${DEVOPS_SECRETS_DIR} -name *.saml2aws -type f)" != "" ]]; then
+            # Environment specific file
+            for FILE in $(find ${DEVOPS_SECRETS_DIR} -name *.${DEVOPS_ENV_NAME}.saml2aws -type f); do
+                FILENAME=$(realpath ${FILE} | rev | cut -d/ -f1 | rev)
+                log "[saml2aws] secrets/${FILENAME}"
+                saml2aws_load_config ${FILE}
+            done
+        fi
+    fi
 }
