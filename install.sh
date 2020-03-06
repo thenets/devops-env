@@ -20,6 +20,7 @@ fi
 
 # Installers apps
 source ${DEVOPS_SRC_DIR}/apps-installers.sh
+install_typescript
 install_python_pip
 install_python_awscli
 install_python_ansible

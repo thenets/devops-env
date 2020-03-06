@@ -2,7 +2,6 @@
 
 source $( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/vars.sh
 
-
 ###
 # Functions
 ###
@@ -13,6 +12,24 @@ install_python_lib(){
     log_info "[python_venv] Upgrading '${LIB_NAME}' to the latest version..."
     . ${DEVOPS_PYTHON_ENV_DIR}/bin/activate 
     pip3 install ${LIB_NAME} -q
+}
+
+###
+# TypeScript
+###
+install_typescript() {
+    if [[ -z "$(command -v npm)" ]] ; then
+        # npm not found
+        sudo apt-get install -y npm
+    fi
+
+    if [[ -z "$(command -v tsc)" ]] ; then
+        # typescript not found
+        sudo npm install -g typescript
+    fi
+}
+install_pulumi() {
+    curl -sSL https://get.pulumi.com | sh
 }
 
 ###
