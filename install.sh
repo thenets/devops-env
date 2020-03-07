@@ -9,8 +9,7 @@ log_info "# Starting DevOps env installation process"
 # Install dependencies
 ${DEVOPS_SRC_DIR}/install-os-dependencies.sh
 
-# Create Python Virtual Environment
-# and activate it
+# Create Python Virtual Environment and activate it
 if ! [[ -f ${DEVOPS_PYTHON_ENV_DIR}/bin/activate ]]; then
     log_info "[python_venv] Creating Python virtualenv..."
     virtualenv -p python3 ${DEVOPS_PYTHON_ENV_DIR}
@@ -36,8 +35,6 @@ install_saml2aws
 # Create dirs
 log_info "[devops_env] Creating project dirs if not exist..."
 mkdir -p ${DEVOPS_PROJECT_DIR}/secrets
-# mkdir -p ${DEVOPS_PROJECT_DIR}/ansible
-# mkdir -p ${DEVOPS_PROJECT_DIR}/terraform
 
 ${DEVOPS_SRC_DIR}/update-gitignore.sh
 

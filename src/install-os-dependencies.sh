@@ -16,8 +16,7 @@ do
     fi
 done
 
-# Install dependencies
-# UBUNTU
+# Install dependencies (UBUNTU)
 if command_loc="$(type -p "apt-get")" || [[ -z $command_loc ]] && [ "$INSTALLATION_REQUIRED" == "true" ]
 then
     SUDO='sudo'
