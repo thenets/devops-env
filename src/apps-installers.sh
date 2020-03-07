@@ -120,6 +120,17 @@ install_hashicorp_vagrant() {
     fi
 }
 
+install_kubernetes_kubectl() {
+    log_info "[kubernetes] Installing kubectl '${KUBECTL_VERSION}'..."
+    wget -q -O ${DEVOPS_ENV_DIR}/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl
+    chmod +x ${DEVOPS_ENV_DIR}/bin/kubectl
+}
+install_kubernetes_aws_iam_authenticator() {
+    log_info "[kubernetes] Installing aws-iam-authenticator '${AWS_IAM_AUTHENTICATOR}'..."
+    wget -q -O ${DEVOPS_ENV_DIR}/bin/aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/${AWS_IAM_AUTHENTICATOR}/bin/linux/amd64/aws-iam-authenticator
+    chmod +x ${DEVOPS_ENV_DIR}/bin/aws-iam-authenticator
+}
+
 # TODO not completed yet
 install_saml2aws() {
     # project from https://github.com/Versent/saml2aws
