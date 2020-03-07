@@ -28,9 +28,6 @@ install_typescript() {
         sudo npm install -g typescript
     fi
 }
-install_pulumi() {
-    curl -sSL https://get.pulumi.com | sh
-}
 
 ###
 # Python Libs
