@@ -31,6 +31,7 @@ install_hashicorp_vault
 install_saml2aws
 install_kubernetes_kubectl
 install_kubernetes_aws_iam_authenticator
+install_kubernetes_eksctl
 
 # install_hashicorp_vagrant
 # install_terragrunt

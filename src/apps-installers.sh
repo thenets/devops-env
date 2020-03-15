@@ -149,3 +149,9 @@ install_terragrunt() {
 	wget -q -O ${DEVOPS_ENV_DIR}/bin/terragrunt https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_amd64
 	chmod +x ${DEVOPS_ENV_DIR}/bin/terragrunt
 }
+
+# TODO not completed yet
+install_kubernetes_eksctl() {
+    log_info "[terragrunt] Installing eksctl 'latest'..."
+    curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C ${DEVOPS_ENV_DIR}/bin/
+}
