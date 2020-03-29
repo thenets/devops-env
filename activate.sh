@@ -23,6 +23,12 @@ ORIGINAL_PS1=${PS1}
 # Loads Python virtualenv
 source ${DEVOPS_PYTHON_ENV_DIR}/bin/activate
 
+# Saml2aws Authentication
+saml2aws_load
+
+# AWSADFS Authentication
+awsadfs_load
+
 # Loads all envs from secrets
 if [[ -d ${DEVOPS_SECRETS_DIR} ]]; then
     if [[ "$(find ${DEVOPS_SECRETS_DIR} -name *.env -type f)" != "" ]]; then
@@ -58,11 +64,5 @@ alias ansible-playbook='ansible-playbook -i ${DEVOPS_ANSIBLE_DIR}/hosts.ini --va
 
 # Do Hashicorp Vault login
 source ${DEVOPS_SRC_DIR}/hashicorp_vault/get-token.sh
-
-# Saml2aws Authentication
-saml2aws_load
-
-# AWSADFS Authentication
-awsadfs_load
 
 set +o allexport
