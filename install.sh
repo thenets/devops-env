@@ -21,18 +21,18 @@ fi
 source ${DEVOPS_SRC_DIR}/apps-installers.sh
 install_typescript
 install_python_pip
-install_python_awscli
-install_python_ansible
-install_python_cfn_lint
-install_python_troposphere
-install_python_aws_adfs
-install_hashicorp_terraform
-install_hashicorp_vault
-install_saml2aws
-install_kubernetes_kubectl
-install_kubernetes_aws_iam_authenticator
-install_kubernetes_eksctl
 
+# install_python_awscli
+# install_python_ansible
+# install_python_cfn_lint
+# install_python_troposphere
+# install_python_aws_adfs
+# install_hashicorp_terraform
+# install_hashicorp_vault
+# install_saml2aws
+# install_kubernetes_kubectl
+# install_kubernetes_aws_iam_authenticator
+# install_kubernetes_eksctl
 # install_hashicorp_vagrant
 # install_terragrunt
 

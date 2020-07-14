@@ -1,0 +1,86 @@
+#!/bin/bash
+
+set -e
+
+# Import main libs and vars
+source $( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/../src/vars.sh
+
+# Import installers apps
+source ${DEVOPS_SRC_DIR}/apps-installers.sh
+
+function f_install {
+    echo $@
+
+    # I know that I should use switch-case, but
+    # the Bash syntax for it is poor.
+    if [[ $1 == "ansible" ]]; then
+        install_python_pip
+        install_python_ansible
+        exit
+
+    elif [[ $1 == "awscli" ]]; then
+        install_python_pip
+        install_python_awscli
+        install_python_aws_adfs
+        install_saml2aws
+        exit
+
+    elif [[ $1 == "hashicorp_terraform" ]]; then
+        install_hashicorp_terraform
+        exit
+
+    elif [[ $1 == "hashicorp_vault" ]]; then
+        install_hashicorp_vault
+        exit
+
+    elif [[ $1 == "kubernetes" ]]; then
+        install_kubernetes_kubectl
+        install_kubernetes_eksctl
+        install_kubernetes_aws_iam_authenticator
+        exit
+    
+    else
+        log_error "[ERROR] Installation package not found!"
+        f_install_list
+        exit 1
+    fi
+}
+
+function f_install_list {
+    cat <<- HELP_INFO
+Available packages:
+  ansible
+  awscli
+  hashicorp_terraform
+  hashicorp_vault
+  kubernetes
+HELP_INFO
+}
+
+function f_help {
+    cat <<- HELP_INFO
+Command list:
+  install      - install package
+  install-list - list all available packages for installation
+HELP_INFO
+}
+
+# Menu
+if [[ $1 == "install" ]]; then
+    shift
+    f_install $@
+    exit
+elif [[ $1 == "install-list" ]]; then
+    f_install_list
+    exit
+elif [[ $1 == "help" ]]; then
+    f_help
+    exit
+elif [[ $1 == "update" ]]; then
+    ${DEVOPS_DIR}/update.sh
+    exit
+else
+    log_error "[ERROR] Command not supported!"
+    f_help
+    exit 1
+fi

@@ -2,19 +2,6 @@
 
 A toolset to work with cloud environment.
 
-## What's included?
-
-Binaries:
-
-- Ansible
-- Hashicorp Terraform
-- Hashocorp Vault
-- AWS CLI
-
-Features:
-
-- Simple way to share secrets with ops team using Hashicorp Vault.
-
 ## How to install
 
 ```bash
@@ -32,7 +19,7 @@ git clone https://github.com/thenets/devops-env.git devops
 ## How to update
 
 ```bash
-./devops/bin/devops-env-update
+./devops/update.sh
 ```
 
 ## Add to your .gitignore
