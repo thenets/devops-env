@@ -137,7 +137,7 @@ install_saml2aws() {
     if [[ -f ${DEVOPS_ENV_DIR}/bin/saml2aws ]]; then
     	log_info "[saml2aws] Reinstalling saml2aws '${SAML2AWS_VERSION}'..."
 	rm -f ${DEVOPS_ENV_DIR}/bin/saml2aws
-    elif
+    else
     	log_info "[saml2aws] Installing saml2aws '${SAML2AWS_VERSION}'..."
     fi
 	#wget -q -O ${DEVOPS_ENV_DIR}/bin/saml2aws.tar.gz https://github.com/Versent/saml2aws/releases/download/v${SAML2AWS_VERSION}/saml2aws_${SAML2AWS_VERSION}_linux_amd64.tar.gz
