@@ -134,9 +134,14 @@ install_kubernetes_aws_iam_authenticator() {
 # TODO not completed yet
 install_saml2aws() {
     # project from https://github.com/Versent/saml2aws
-    log_info "[saml2aws] Installing saml2aws '${SAML2AWS_VERSION}'..."
+    if [[ -f ${DEVOPS_ENV_DIR}/bin/saml2aws ]]; then
+    	log_info "[saml2aws] Reinstalling saml2aws '${SAML2AWS_VERSION}'..."
+	rm -f ${DEVOPS_ENV_DIR}/bin/saml2aws
+    elif
+    	log_info "[saml2aws] Installing saml2aws '${SAML2AWS_VERSION}'..."
+    fi
 	#wget -q -O ${DEVOPS_ENV_DIR}/bin/saml2aws.tar.gz https://github.com/Versent/saml2aws/releases/download/v${SAML2AWS_VERSION}/saml2aws_${SAML2AWS_VERSION}_linux_amd64.tar.gz
-    rm -f ${DEVOPS_ENV_DIR}/bin/saml2aws
+    
     #tar -xzvf ${DEVOPS_ENV_DIR}/bin/saml2aws.tar.gz -C ${DEVOPS_ENV_DIR}/bin/ 1>/dev/null
     #rm -f ${DEVOPS_ENV_DIR}/bin/saml2aws.tar.gz
     
