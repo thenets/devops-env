@@ -9,8 +9,6 @@ source $( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/../src/
 source ${DEVOPS_SRC_DIR}/apps-installers.sh
 
 function f_install {
-    echo $@
-
     # I know that I should use switch-case, but
     # the Bash syntax for it is poor.
     if [[ $1 == "ansible" ]]; then

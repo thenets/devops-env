@@ -155,6 +155,6 @@ install_terragrunt() {
 
 # TODO not completed yet
 install_kubernetes_eksctl() {
-    log_info "[terragrunt] Installing eksctl 'latest'..."
+    log_info "[kubernetes] Installing eksctl 'latest'..."
     curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C ${DEVOPS_ENV_DIR}/bin/
 }
