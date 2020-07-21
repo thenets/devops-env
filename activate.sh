@@ -65,4 +65,9 @@ alias ansible-playbook='ansible-playbook -i ${DEVOPS_ANSIBLE_DIR}/hosts.ini --va
 # Do Hashicorp Vault login
 source ${DEVOPS_SRC_DIR}/hashicorp_vault/get-token.sh
 
+# Load custom plugins
+if [[ -f "${DEVOPS_PLUGINS_DIR}/activate.sh" ]]; then
+    source ${DEVOPS_PLUGINS_DIR}/activate.sh
+fi
+
 set +o allexport
