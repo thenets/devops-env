@@ -12,7 +12,7 @@ ${DEVOPS_SRC_DIR}/install-os-dependencies.sh
 # Create Python Virtual Environment and activate it
 if ! [[ -f ${DEVOPS_PYTHON_ENV_DIR}/bin/activate ]]; then
     log_info "[python_venv] Creating Python virtualenv..."
-    virtualenv -p python3 ${DEVOPS_PYTHON_ENV_DIR}
+    virtualenv -q -p python3 ${DEVOPS_PYTHON_ENV_DIR}
 else
     log_info "[python_venv] Python virtualenv detected. Skipping installation."
 fi

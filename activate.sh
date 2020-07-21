@@ -1,5 +1,12 @@
 #!/bin/bash
 
+if [[ ! $_ != $0 ]]; then
+    source $( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/src/vars.sh
+    log_error "[ERROR] DevOps env must be sourced! You should run:"
+    log_error "        $ source ./devops/activate.sh"
+    exit 1
+fi
+
 if [[ ${PS1} == "["*"|"*"]"* ]]; then
     log_warning "[devops_env] Already activated! Reloading..."
     deactivate
