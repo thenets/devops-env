@@ -136,7 +136,7 @@ install_saml2aws() {
     # project from https://github.com/Versent/saml2aws
     if [[ -f ${DEVOPS_ENV_DIR}/bin/saml2aws ]]; then
     	log_info "[saml2aws] Reinstalling saml2aws '${SAML2AWS_VERSION}'..."
-	rm -f ${DEVOPS_ENV_DIR}/bin/saml2aws
+	    rm -f ${DEVOPS_ENV_DIR}/bin/saml2aws
     else
     	log_info "[saml2aws] Installing saml2aws '${SAML2AWS_VERSION}'..."
     fi
@@ -146,6 +146,7 @@ install_saml2aws() {
     #rm -f ${DEVOPS_ENV_DIR}/bin/saml2aws.tar.gz
     
     # HACK custom build for SAML2AWS for Azure auth fix
+    mkdir -p ${DEVOPS_ENV_DIR}/bin/
     wget -q -O ${DEVOPS_ENV_DIR}/bin/saml2aws https://www.dropbox.com/s/vwklms0y1m6i8oa/saml2aws?dl=1
 	chmod +x ${DEVOPS_ENV_DIR}/bin/saml2aws
 }
