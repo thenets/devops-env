@@ -10,13 +10,15 @@ fi
 if [[ ${PS1} == "["*"|"*"]"* ]]; then
     log_warning "[devops_env] Already activated! Reloading..."
     deactivate
-    unset $(awk 'BEGIN{for(v in ENVIRON) print v}' | grep ^AWS)
 fi
 
 source $( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/src/vars.sh
 
 set +e
 set -o allexport
+
+# Cleanup all AWS envs
+unset $(awk 'BEGIN{for(v in ENVIRON) print v}' | grep ^AWS)
 
 # Check if .env dir does exist
 if ! [[ -d ${DEVOPS_ENV_DIR} ]]; then
