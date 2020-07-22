@@ -60,6 +60,8 @@ function f_help {
 Command list:
   install      - install package
   install-list - list all available packages for installation
+  help         - show this help section
+  version      - show commit version info
 HELP_INFO
 }
 
@@ -76,6 +78,9 @@ elif [[ $1 == "help" ]]; then
     exit
 elif [[ $1 == "update" ]]; then
     ${DEVOPS_DIR}/update.sh
+    exit
+elif [[ $1 == "version" ]]; then
+    git log --pretty=format:"version    : %h%nrelease at : %ai" -n 1
     exit
 else
     log_error "[ERROR] Command not supported!"
