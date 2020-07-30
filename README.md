@@ -2,7 +2,7 @@
 
 A toolset to work with cloud environment.
 
-[![asciicast](./docs/preview.svg)](https://asciinema.org/a/fR6HNcPAP4XigZkWjOWAI5zfk)
+[![asciicast](./docs/preview.svg)](https://asciinema.org/a/sShTBvpzo9yohonEGsEKr6HC1)
 
 ## How to install
 
