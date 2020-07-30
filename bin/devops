@@ -80,6 +80,7 @@ elif [[ $1 == "update" ]]; then
     ${DEVOPS_DIR}/update.sh
     exit
 elif [[ $1 == "version" ]]; then
+    cd ${DEVOPS_DIR}
     git log --pretty=format:"version    : %h%nrelease at : %ai" -n 1
     exit
 else
