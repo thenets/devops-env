@@ -24,6 +24,31 @@ git clone https://github.com/thenets/devops-env.git devops
 ./devops/update.sh
 ```
 
+## Install tools
+
+You can check all tools available:
+
+```bash
+# Enable DevOps env
+source devops/activate.sh
+
+# List installers
+devops install-list
+```
+
+Than install the tools that you need:
+
+```bash
+# Enable DevOps env
+source devops/activate.sh
+
+# Install Hashicorp Terraform
+devops install hashicorp_terraform
+
+# Install AWS CLI
+devops install awscli
+```
+
 ## Add to your .gitignore
 
 The `./.gitignore` will be verified during the installation process. If some line is missing it will be appended in the end.
