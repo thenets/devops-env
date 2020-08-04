@@ -140,14 +140,14 @@ install_saml2aws() {
     else
     	log_info "[saml2aws] Installing saml2aws '${SAML2AWS_VERSION}'..."
     fi
-	#wget -q -O ${DEVOPS_ENV_DIR}/bin/saml2aws.tar.gz https://github.com/Versent/saml2aws/releases/download/v${SAML2AWS_VERSION}/saml2aws_${SAML2AWS_VERSION}_linux_amd64.tar.gz
-    
-    #tar -xzvf ${DEVOPS_ENV_DIR}/bin/saml2aws.tar.gz -C ${DEVOPS_ENV_DIR}/bin/ 1>/dev/null
-    #rm -f ${DEVOPS_ENV_DIR}/bin/saml2aws.tar.gz
+	
+    wget -q -O ${DEVOPS_ENV_DIR}/bin/saml2aws.tar.gz https://github.com/Versent/saml2aws/releases/download/v${SAML2AWS_VERSION}/saml2aws_${SAML2AWS_VERSION}_linux_amd64.tar.gz
+    tar -xzvf ${DEVOPS_ENV_DIR}/bin/saml2aws.tar.gz -C ${DEVOPS_ENV_DIR}/bin/ 1>/dev/null
+    rm -f ${DEVOPS_ENV_DIR}/bin/saml2aws.tar.gz
     
     # HACK custom build for SAML2AWS for Azure auth fix
-    mkdir -p ${DEVOPS_ENV_DIR}/bin/
-    wget -q -O ${DEVOPS_ENV_DIR}/bin/saml2aws https://www.dropbox.com/s/vwklms0y1m6i8oa/saml2aws?dl=1
+    # mkdir -p ${DEVOPS_ENV_DIR}/bin/
+    # wget -q -O ${DEVOPS_ENV_DIR}/bin/saml2aws https://www.dropbox.com/s/vwklms0y1m6i8oa/saml2aws?dl=1
 	chmod +x ${DEVOPS_ENV_DIR}/bin/saml2aws
 }
 
