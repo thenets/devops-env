@@ -18,7 +18,6 @@ install_python_lib(){
 # TypeScript
 ###
 install_typescript() {
-    set -x
     if [[ -z "$(command -v npm)" ]] ; then
         # npm not found
         sudo apt-get install -y npm
