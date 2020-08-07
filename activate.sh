@@ -20,6 +20,18 @@ set -o allexport
 # Cleanup all AWS envs
 unset $(awk 'BEGIN{for(v in ENVIRON) print v}' | grep ^AWS)
 
+# Remove all WSL 1/2
+NEW_PATH=""
+lines=$(echo $PATH | sed 's/:/\n/g')
+while read line; do 
+    if [[ ! "${line}"  =~ ^/mnt/c/*.* ]]; then
+        NEW_PATH="${line}:${NEW_PATH}"
+    fi
+done <<< $lines
+NEW_PATH="${NEW_PATH%?}"
+export PATH=${NEW_PATH}
+
+
 # Check if .env dir does exist
 if ! [[ -d ${DEVOPS_ENV_DIR} ]]; then
     log_error "[ERROR] DevOps env not initialized!"
