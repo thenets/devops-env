@@ -76,6 +76,11 @@ alias ansible-playbook='ansible-playbook -i ${DEVOPS_ANSIBLE_DIR}/hosts.ini --va
 source ${DEVOPS_SRC_DIR}/hashicorp_vault/get-token.sh
 
 # Load custom plugins
+if [[ -d "${DEVOPS_DIR}/plugins/activate/" ]]; then
+    if [[ "$(ls -A ${DEVOPS_DIR}/plugins/activate/)" ]]; then
+        source ${DEVOPS_DIR}/plugins/activate/*.sh
+    fi
+fi
 if [[ -f "${DEVOPS_PLUGINS_DIR}/activate.sh" ]]; then
     source ${DEVOPS_PLUGINS_DIR}/activate.sh
 fi
