@@ -13,6 +13,17 @@ export DEVOPS_PYTHON_ENV_DIR=${DEVOPS_ENV_DIR}/python_env
 export DEVOPS_CONFIG_FILE=${DEVOPS_PROJECT_DIR}/config.ini
 export DEVOPS_VERSIONS_FILE=${DEVOPS_PROJECT_DIR}/versions.ini
 
+# Remove all WSL 1/2
+NEW_PATH=""
+lines=$(echo $PATH | sed 's/:/\n/g')
+while read line; do 
+    if [[ ! "${line}"  =~ ^/mnt/c/*.* ]]; then
+        NEW_PATH="${line}:${NEW_PATH}"
+    fi
+done <<< $lines
+NEW_PATH="${NEW_PATH%?}"
+export PATH=${NEW_PATH}
+
 # Dynamic vars
 export PROJECT_NAME=$(realpath ${DEVOPS_PROJECT_DIR} | rev | cut -d/ -f1 | rev)
 if [[ -z $1 ]]; then
