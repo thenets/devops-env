@@ -59,7 +59,7 @@ unset LINE
 unset LINES
 
 # Add reactivate alias
-alias reactivate='source ${DEVOPS_DIR}/activate.sh'
+alias reactivate="source ${DEVOPS_DIR}/activate.sh ${@}"
 
 # Add binaries to the PATH
 export PATH=${DEVOPS_ENV_DIR}/bin:${PATH}
